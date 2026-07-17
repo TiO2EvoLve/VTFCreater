@@ -1,0 +1,21 @@
+using System.Collections.Generic;
+using System.Text.Json.Serialization;
+using VTFCreater.Enum;
+
+namespace VTFCreater.Models;
+
+public class AppConfig
+{
+    public string SourceDirectory { get; set; } = string.Empty;
+
+    public string OutputDirectory { get; set; } = string.Empty;
+
+    public string VTFCmdPath { get; set; } = "dll/x64/VTFCmd.exe";
+
+    public List<string> BaseColorSuffixes { get; set; } = ["", "_d", "_diffuse"];
+
+    public List<string> NormalSuffixes { get; set; } = ["_n", "_normal", "_nm"];
+
+    [JsonConverter(typeof(JsonStringEnumConverter))]
+    public Formats Format { get; set; } = Formats.dxt1;
+}

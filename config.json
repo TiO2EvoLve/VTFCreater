@@ -1,0 +1,8 @@
+{
+  "sourceDirectory": "",
+  "outputDirectory": "",
+  "vtfCmdPath": "dll/x64/VTFCmd.exe",
+  "baseColorSuffixes": ["", "_d", "_diffuse"],
+  "normalSuffixes": ["_n", "_normal", "_nm"],
+  "format": "dxt1"
+}

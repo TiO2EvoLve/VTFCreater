@@ -1,0 +1,113 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:VTFCreater.ViewModels"
+             xmlns:enum="using:VTFCreater.Enum"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="900" d:DesignHeight="700"
+             x:Class="VTFCreater.Views.SettingsView"
+             x:DataType="vm:SettingsViewModel">
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel Spacing="16" Margin="0,8,0,16">
+
+            <!-- 路径配置 -->
+            <Border Classes="card">
+                <StackPanel Spacing="16">
+                    <TextBlock Classes="page-subtitle" Text="路径配置" />
+
+                    <StackPanel Spacing="8">
+                        <TextBlock Classes="field-label" Text="源贴图目录" />
+                        <Grid ColumnDefinitions="*,Auto">
+                            <TextBox Grid.Column="0" Text="{Binding SourceDirectory}" PlaceholderText="选择包含 PNG 的文件夹（支持递归扫描）" />
+                            <Button Grid.Column="1" Classes="browse" Margin="8,0,0,0" Content="浏览…" Command="{Binding BrowseSourceDirectoryCommand}" />
+                        </Grid>
+                    </StackPanel>
+
+                    <StackPanel Spacing="8">
+                        <TextBlock Classes="field-label" Text="输出目录" />
+                        <Grid ColumnDefinitions="*,Auto">
+                            <TextBox Grid.Column="0" Text="{Binding OutputDirectory}" PlaceholderText="VTF / VMT 输出位置" />
+                            <Button Grid.Column="1" Classes="browse" Margin="8,0,0,0" Content="浏览…" Command="{Binding BrowseOutputDirectoryCommand}" />
+                        </Grid>
+                    </StackPanel>
+
+                    <StackPanel Spacing="8">
+                        <TextBlock Classes="field-label" Text="VTFCmd.exe 路径" />
+                        <Grid ColumnDefinitions="*,Auto">
+                            <TextBox Grid.Column="0" Text="{Binding VtfCmdPath}" PlaceholderText="dll/x64/VTFCmd.exe" />
+                            <Button Grid.Column="1" Classes="browse" Margin="8,0,0,0" Content="浏览…" Command="{Binding BrowseVtfCmdPathCommand}" />
+                        </Grid>
+                    </StackPanel>
+
+                    <StackPanel Spacing="8">
+                        <TextBlock Classes="field-label" Text="VTF 压缩格式" />
+                        <ComboBox ItemsSource="{Binding AvailableFormats}" SelectedItem="{Binding Format}" HorizontalAlignment="Left" MinWidth="160" />
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+
+            <!-- 后缀规则 -->
+            <Grid ColumnDefinitions="*,*" ColumnSpacing="16">
+                <!-- 漫反射后缀 -->
+                <Border Grid.Column="0" Classes="card">
+                    <StackPanel Spacing="12">
+                        <TextBlock Classes="page-subtitle" Text="漫反射贴图后缀" />
+                        <TextBlock Classes="hint-text" Text="示例：空字符串、_d、_diffuse" TextWrapping="Wrap" />
+
+                        <ListBox ItemsSource="{Binding BaseColorSuffixes}"
+                                 SelectedItem="{Binding SelectedBaseColorSuffix}"
+                                 MinHeight="120"
+                                 Classes="suffix-list">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding StringFormat='「{0}」'}" />
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+
+                        <Grid ColumnDefinitions="*,Auto,Auto">
+                            <TextBox Grid.Column="0" Text="{Binding NewBaseColorSuffix}" PlaceholderText="添加新后缀…" />
+                            <Button Grid.Column="1" Classes="secondary" Margin="8,0,0,0" Content="添加" Command="{Binding AddBaseColorSuffixCommand}" />
+                            <Button Grid.Column="2" Classes="secondary" Margin="8,0,0,0" Content="删除" Command="{Binding RemoveBaseColorSuffixCommand}" />
+                        </Grid>
+                    </StackPanel>
+                </Border>
+
+                <!-- 法线后缀 -->
+                <Border Grid.Column="1" Classes="card">
+                    <StackPanel Spacing="12">
+                        <TextBlock Classes="page-subtitle" Text="法线贴图后缀" />
+                        <TextBlock Classes="hint-text" Text="示例：_n、_normal、_nm" TextWrapping="Wrap" />
+
+                        <ListBox ItemsSource="{Binding NormalSuffixes}"
+                                 SelectedItem="{Binding SelectedNormalSuffix}"
+                                 MinHeight="120"
+                                 Classes="suffix-list">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding StringFormat='「{0}」'}" />
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+
+                        <Grid ColumnDefinitions="*,Auto,Auto">
+                            <TextBox Grid.Column="0" Text="{Binding NewNormalSuffix}" PlaceholderText="添加新后缀…" />
+                            <Button Grid.Column="1" Classes="secondary" Margin="8,0,0,0" Content="添加" Command="{Binding AddNormalSuffixCommand}" />
+                            <Button Grid.Column="2" Classes="secondary" Margin="8,0,0,0" Content="删除" Command="{Binding RemoveNormalSuffixCommand}" />
+                        </Grid>
+                    </StackPanel>
+                </Border>
+            </Grid>
+
+            <!-- 保存操作 -->
+            <Border Classes="card">
+                <Grid ColumnDefinitions="*,Auto,Auto">
+                    <TextBlock Grid.Column="0" Classes="status-text" Text="{Binding StatusMessage}" VerticalAlignment="Center" />
+                    <Button Grid.Column="1" Classes="secondary" Margin="0,0,8,0" Content="重新加载" Command="{Binding ReloadConfigCommand}" />
+                    <Button Grid.Column="2" Classes="primary" Content="保存配置" Command="{Binding SaveConfigCommand}" />
+                </Grid>
+            </Border>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>
