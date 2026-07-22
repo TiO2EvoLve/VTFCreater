@@ -168,4 +168,11 @@ public partial class SettingsViewModel : ViewModelBase
         LoadFromConfig();
         StatusMessage = "已从 config.json 重新加载";
     }
+
+    [RelayCommand]
+    private void Reset()
+    {
+        _configService.Update(new AppConfig());
+        LoadFromConfig();
+    }
 }

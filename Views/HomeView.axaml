@@ -38,7 +38,7 @@
         </StackPanel>
 
         <!-- 日志面板 -->
-        <Border Grid.Row="2" Classes="card log-card">
+        <Border Grid.Row="2" BorderThickness="1" BorderBrush="#FF7A45" Classes="card log-card">
             <Grid RowDefinitions="Auto,*">
                 <TextBlock Grid.Row="0" Classes="section-title" Text="运行日志" Margin="0,0,0,12" />
                 <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">

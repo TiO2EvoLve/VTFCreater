@@ -33,7 +33,7 @@
                     </StackPanel>
 
                     <StackPanel Spacing="8">
-                        <TextBlock Classes="field-label" Text="VTFCmd.exe 路径" />
+                        <TextBlock Classes="field-label" Text="VTFCmd.exe 路径（一般不动）" />
                         <Grid ColumnDefinitions="*,Auto">
                             <TextBox Grid.Column="0" Text="{Binding VtfCmdPath}" PlaceholderText="dll/x64/VTFCmd.exe" />
                             <Button Grid.Column="1" Classes="browse" Margin="8,0,0,0" Content="浏览…" Command="{Binding BrowseVtfCmdPathCommand}" />
@@ -102,10 +102,11 @@
 
             <!-- 保存操作 -->
             <Border Classes="card">
-                <Grid ColumnDefinitions="*,Auto,Auto">
+                <Grid ColumnDefinitions="*,Auto,Auto,Auto">
                     <TextBlock Grid.Column="0" Classes="status-text" Text="{Binding StatusMessage}" VerticalAlignment="Center" />
-                    <Button Grid.Column="1" Classes="secondary" Margin="0,0,8,0" Content="重新加载" Command="{Binding ReloadConfigCommand}" />
-                    <Button Grid.Column="2" Classes="primary" Content="保存配置" Command="{Binding SaveConfigCommand}" />
+                    <Button Grid.Column="1" Classes="secondary" Margin="0,0,8,0" Content="恢复默认" Command="{Binding ResetCommand}"/>
+                    <Button Grid.Column="2" Classes="secondary" Margin="0,0,8,0" Content="重新加载" Command="{Binding ReloadConfigCommand}" />
+                    <Button Grid.Column="3" Classes="primary" Content="保存配置" Command="{Binding SaveConfigCommand}" />
                 </Grid>
             </Border>
         </StackPanel>
