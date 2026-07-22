@@ -1,5 +1,6 @@
 using System;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -68,4 +69,5 @@ public partial class HomeViewModel : ViewModelBase
     }
 
     private bool CanProcess() => !IsProcessing;
+    
 }

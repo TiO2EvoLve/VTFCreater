@@ -1,7 +1,7 @@
 LightmappedGeneric
 {
-	$basetexture "{{ VTFBaseColorPath }}"
-{{ if VTFNormalPath }}
-	$bumpmap "{{ VTFNormalPath }}"
+	$basetexture "{{ color }}"
+{{ if normal }}
+	$bumpmap "{{ normal }}"
 {{ end }}
 }

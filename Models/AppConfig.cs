@@ -12,7 +12,7 @@ public class AppConfig
 
     public string VTFCmdPath { get; set; } = "dll/x64/VTFCmd.exe";
 
-    public List<string> BaseColorSuffixes { get; set; } = ["", "_d", "_diffuse"];
+    public List<string> BaseColorSuffixes { get; set; } = ["", "_color", "_diffuse", "_diff", "_base"];
 
     public List<string> NormalSuffixes { get; set; } = ["_n", "_normal", "_nm"];
 

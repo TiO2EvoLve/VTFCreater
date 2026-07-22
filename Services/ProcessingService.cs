@@ -3,6 +3,7 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using ImageMagick;
 using VTFCreater.Models;
 
 namespace VTFCreater.Services;
@@ -22,7 +23,7 @@ public class ProcessingService
             return;
         }
 
-        if (string.IsNullOrWhiteSpace(config.OutputDirectory))
+        if (string.IsNullOrWhiteSpace(config.OutputDirectory) || !Directory.Exists(config.OutputDirectory))
         {
             logService.Error("输出目录无效，请先在设置中配置。");
             return;
@@ -31,6 +32,19 @@ public class ProcessingService
         logService.Info("开始扫描 PNG 文件…");
 
         var pngFiles = TextureScanner.ScanPngFiles(config.SourceDirectory);
+        
+        foreach (var file in pngFiles)
+        {
+            var info = new MagickImageInfo(file);
+
+            if (!IsPowerOfTwo(info.Width) ||
+                !IsPowerOfTwo(info.Height))
+            {
+                throw new Exception(
+                    $"以下贴图尺寸不符合要求: {file} ({info.Width}x{info.Height})");
+            }
+        }
+        
         logService.Info($"扫描目录完成，共发现 {pngFiles.Count} 个 PNG 文件。");
 
         var textures = pngFiles
@@ -47,8 +61,7 @@ public class ProcessingService
 
         var materials = MaterialMatcher.BuildMaterials(textures);
         logService.Info($"识别出 {materials.Count} 个材质。");
-
-        Directory.CreateDirectory(config.OutputDirectory);
+        
 
         foreach (var material in materials)
         {
@@ -58,47 +71,60 @@ public class ProcessingService
             {
                 logService.Info($"发现材质：{FormatMaterialLabel(material)}");
             }
-
+            
             if (material.BaseColor is not null)
             {
                 var outputPath = BuildOutputPath(config.OutputDirectory, material.BaseColor);
                 _vtfGenerator.Generate(config.VTFCmdPath, material.BaseColor.FullPath, outputPath, config.Format);
                 logService.Info($"生成：{Path.GetFileName(outputPath)}");
             }
-
             if (material.Normal is not null)
             {
                 var outputPath = BuildOutputPath(config.OutputDirectory, material.Normal);
                 _vtfGenerator.Generate(config.VTFCmdPath, material.Normal.FullPath, outputPath, config.Format);
                 logService.Info($"生成：{Path.GetFileName(outputPath)}");
             }
-
             if (material.ShouldGenerateVmt)
             {
                 await _vmtGenerator.GenerateAsync(material, config.OutputDirectory);
                 logService.Info($"生成：{material.Name}.vmt");
             }
+
+            
         }
 
         logService.Info("全部处理完成。");
     }
-
+    //构建输出路径
     private static string BuildOutputPath(string outputDirectory, TextureFile texture)
     {
         var relativeDirectory = texture.RelativePath.Contains(Path.DirectorySeparatorChar)
             ? Path.GetDirectoryName(texture.RelativePath)
             : string.Empty;
-
-        var fileName = Path.GetFileNameWithoutExtension(texture.FileName) + ".vtf";
+        
         return string.IsNullOrEmpty(relativeDirectory)
-            ? Path.Combine(outputDirectory, fileName)
-            : Path.Combine(outputDirectory, relativeDirectory, fileName);
+            ? Path.Combine(outputDirectory)
+            : Path.Combine(outputDirectory, relativeDirectory);
     }
-
+    
     private static string FormatMaterialLabel(MaterialInfo material)
     {
         return string.IsNullOrEmpty(material.RelativeDirectory)
             ? material.Name
             : $"{material.RelativeDirectory}/{material.Name}";
+    }
+    
+    //检查分辨率是否为n的2次幂
+    public static bool IsPowerOfTwoTexture(string filePath)
+    {
+        var info = new MagickImageInfo(filePath);
+
+        return IsPowerOfTwo(info.Width)
+               && IsPowerOfTwo(info.Height);
+    }
+    //配合上述方法
+    private static bool IsPowerOfTwo(uint value)
+    {
+        return value > 0 && (value & (value - 1)) == 0;
     }
 }

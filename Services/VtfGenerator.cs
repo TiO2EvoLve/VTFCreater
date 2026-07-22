@@ -10,10 +10,10 @@ public class VtfGenerator
 {
     public void Generate(string vtfCmdPath, string sourceFilePath, string outputFilePath, Formats format)
     {
-        var outputDirectory = Path.GetDirectoryName(outputFilePath);
-        if (!string.IsNullOrEmpty(outputDirectory))
+        if (!Directory.Exists(outputFilePath))
         {
-            Directory.CreateDirectory(outputDirectory);
+            if (!string.IsNullOrEmpty(outputFilePath)) 
+                Directory.CreateDirectory(outputFilePath);
         }
 
         var resolvedCmdPath = ResolvePath(vtfCmdPath);

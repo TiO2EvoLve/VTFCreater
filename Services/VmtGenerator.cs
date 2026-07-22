@@ -8,12 +8,7 @@ namespace VTFCreater.Services;
 
 public class VmtGenerator
 {
-    private readonly string _templatePath;
-
-    public VmtGenerator()
-    {
-        _templatePath = Path.Combine(AppContext.BaseDirectory, "template", "simple.txt");
-    }
+    private readonly string _templatePath = Path.Combine(AppContext.BaseDirectory, "template", "simple.txt");
 
     public async Task GenerateAsync(MaterialInfo material, string outputDirectory)
     {
@@ -21,23 +16,23 @@ public class VmtGenerator
         {
             return;
         }
-
+        
         var outputFolder = Path.Combine(outputDirectory, material.RelativeDirectory);
-        Directory.CreateDirectory(outputFolder);
-
+        //读取模板内容
         var templateContent = await File.ReadAllTextAsync(_templatePath);
+        //解析模板内容
         var template = Template.Parse(templateContent);
-
+        //vmt输出路径
         var vmtPath = Path.Combine(outputFolder, $"{material.Name}.vmt");
         var baseColorVtfPath = BuildVtfReference(material.RelativeDirectory, material.BaseColor);
         var normalVtfPath = material.Normal is null
             ? null
             : BuildVtfReference(material.RelativeDirectory, material.Normal);
 
-        var result = template.Render(new
+        var result = await template.RenderAsync(new
         {
-            VTFBaseColorPath = baseColorVtfPath,
-            VTFNormalPath = normalVtfPath
+            Color = baseColorVtfPath,
+            Normal = normalVtfPath
         });
 
         await File.WriteAllTextAsync(vmtPath, result);

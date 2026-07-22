@@ -16,7 +16,6 @@ public static class FileDialogHelper
         {
             return null;
         }
-
         var folders = await window.StorageProvider.OpenFolderPickerAsync(new FolderPickerOpenOptions
         {
             Title = title,
@@ -53,7 +52,6 @@ public static class FileDialogHelper
         {
             return desktop.MainWindow;
         }
-
         return null;
     }
 }
