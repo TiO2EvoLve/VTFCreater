@@ -21,6 +21,7 @@
 
 ## 截图
 
+背景会随着桌面壁纸改变颜色，仅限Win 11
 ![主界面](./Assets/photo1.png)
 ![设置界面](./Assets/photo2.png)
 
@@ -29,7 +30,7 @@
 
 - Windows 64 位操作系统
 - Windows 10 / Windows 11
-
+- .NET 10 Runtime 运行时
 ---
 
 ## 使用说明
