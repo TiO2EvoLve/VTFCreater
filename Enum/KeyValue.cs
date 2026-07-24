@@ -29,15 +29,3 @@ public enum Formats
     RGBA16161616,
     UVLX8888
 }
-
-public enum TextureSize
-{
-    x16,
-    x32,
-    x64,
-    x128,
-    x512,
-    x1024,
-    x2048,
-    x4096,
-}

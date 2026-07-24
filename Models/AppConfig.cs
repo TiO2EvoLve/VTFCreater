@@ -20,5 +20,4 @@ public class AppConfig
     [JsonConverter(typeof(JsonStringEnumConverter))]
     public Formats Format { get; set; } = Formats.DXT1;
     
-    
 }

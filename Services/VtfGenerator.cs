@@ -37,7 +37,8 @@ public class VtfGenerator
         cmd.ArgumentList.Add(outputFilePath);
         cmd.ArgumentList.Add("-format");
         cmd.ArgumentList.Add(format.ToString());
-
+        
+        Console.WriteLine(cmd.Arguments);
         using var process = Process.Start(cmd)
                               ?? throw new InvalidOperationException("无法启动 VTFCmd 进程。");
 
