@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using VTFCreater.Models;
 
 namespace VTFCreater.Services;
-
+//配置文件保存/加载
 public class ConfigService
 {
     private static readonly JsonSerializerOptions JsonOptions = new()

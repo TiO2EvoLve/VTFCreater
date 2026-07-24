@@ -1,5 +1,6 @@
 namespace VTFCreater.Models;
 
+//日志类
 public class LogEntry
 {
     public required string Level { get; init; }

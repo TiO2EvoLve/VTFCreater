@@ -1,5 +1,6 @@
 namespace VTFCreater.Models;
 
+//材质属性
 public class MaterialInfo
 {
     public required string Name { get; init; }

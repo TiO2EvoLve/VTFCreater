@@ -5,6 +5,7 @@ using VTFCreater.Models;
 
 namespace VTFCreater.Services;
 
+//日志内容
 public class LogService
 {
     public ObservableCollection<LogEntry> Entries { get; } = [];

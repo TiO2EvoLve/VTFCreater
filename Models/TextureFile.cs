@@ -2,6 +2,7 @@ using System.IO;
 
 namespace VTFCreater.Models;
 
+//文件属性
 public class TextureFile
 {
     public required string FullPath { get; init; }

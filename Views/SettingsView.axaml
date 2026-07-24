@@ -39,10 +39,16 @@
                             <Button Grid.Column="1" Classes="browse" Margin="8,0,0,0" Content="浏览…" Command="{Binding BrowseVtfCmdPathCommand}" />
                         </Grid>
                     </StackPanel>
-
+                    <StackPanel Orientation="Horizontal" Spacing="20">
                     <StackPanel Spacing="8">
                         <TextBlock Classes="field-label" Text="VTF 压缩格式" />
                         <ComboBox ItemsSource="{Binding AvailableFormats}" SelectedItem="{Binding Format}" HorizontalAlignment="Left" MinWidth="160" />
+                    </StackPanel>
+                    
+                    <StackPanel Spacing="8">
+                        <TextBlock Classes="field-label" Text="最大生成分辨率" />
+                        <ComboBox ItemsSource="{Binding AvailableFormats}" SelectedItem="{Binding Format}" HorizontalAlignment="Left" MinWidth="160" />
+                    </StackPanel>
                     </StackPanel>
                 </StackPanel>
             </Border>

@@ -2,10 +2,10 @@ using System;
 using System.Diagnostics;
 using System.IO;
 using VTFCreater.Enum;
-using VTFCreater.Models;
 
 namespace VTFCreater.Services;
 
+//VTF文件生成器
 public class VtfGenerator
 {
     public void Generate(string vtfCmdPath, string sourceFilePath, string outputFilePath, Formats format)

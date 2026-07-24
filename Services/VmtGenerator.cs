@@ -6,6 +6,7 @@ using VTFCreater.Models;
 
 namespace VTFCreater.Services;
 
+//VMT文件生成器
 public class VmtGenerator
 {
     private readonly string _templatePath = Path.Combine(AppContext.BaseDirectory, "template", "simple.txt");

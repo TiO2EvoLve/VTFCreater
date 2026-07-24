@@ -4,6 +4,7 @@ using VTFCreater.Enum;
 
 namespace VTFCreater.Models;
 
+//需要保存的配置项
 public class AppConfig
 {
     public string SourceDirectory { get; set; } = string.Empty;
@@ -17,5 +18,7 @@ public class AppConfig
     public List<string> NormalSuffixes { get; set; } = ["_n", "_normal", "_nm"];
 
     [JsonConverter(typeof(JsonStringEnumConverter))]
-    public Formats Format { get; set; } = Formats.dxt1;
+    public Formats Format { get; set; } = Formats.DXT1;
+    
+    
 }

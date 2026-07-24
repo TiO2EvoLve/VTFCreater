@@ -19,7 +19,7 @@ public partial class SettingsViewModel : ViewModelBase
 
     [ObservableProperty] private string _vtfCmdPath = string.Empty;
 
-    [ObservableProperty] private Formats _format = Formats.dxt1;
+    [ObservableProperty] private Formats _format = Formats.DXT1;
 
     [ObservableProperty] private string _newBaseColorSuffix = string.Empty;
 
@@ -35,7 +35,7 @@ public partial class SettingsViewModel : ViewModelBase
 
     public ObservableCollection<string> NormalSuffixes { get; } = [];
 
-    public Formats[] AvailableFormats { get; } = [Formats.dxt1, Formats.dxt5];
+    public Formats[] AvailableFormats { get; } = [Formats.DXT1, Formats.DXT5];
 
     public SettingsViewModel(ConfigService configService)
     {

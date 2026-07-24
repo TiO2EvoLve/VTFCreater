@@ -4,6 +4,7 @@ using VTFCreater.Models;
 
 namespace VTFCreater.Services;
 
+//图片匹配
 public static class MaterialMatcher
 {
     public static IReadOnlyList<MaterialInfo> BuildMaterials(IEnumerable<TextureFile> textures)

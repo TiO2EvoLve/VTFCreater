@@ -31,12 +31,13 @@ public class ProcessingService
 
         logService.Info("开始扫描 PNG 文件…");
 
-        var pngFiles = TextureScanner.ScanPngFiles(config.SourceDirectory);
+        var pngFiles = TextureScanner.ScanImageFiles(config.SourceDirectory);
         
         foreach (var file in pngFiles)
         {
             var info = new MagickImageInfo(file);
 
+            //检查是否符合n的2次幂
             if (!IsPowerOfTwo(info.Width) ||
                 !IsPowerOfTwo(info.Height))
             {
