@@ -5,6 +5,7 @@ using VTFCreater.Enum;
 namespace VTFCreater.Models;
 
 //需要保存的配置项
+[JsonSerializable(typeof(AppConfig))]
 public class AppConfig
 {
     public string SourceDirectory { get; set; } = string.Empty;

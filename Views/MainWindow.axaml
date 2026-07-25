@@ -46,7 +46,7 @@
         </Border>
 
         <!-- 主内容 -->
-        <Border Grid.Row="1" Margin="20,8,20,20" Classes="main-content">
+        <Border Grid.Row="1" Classes="main-content">
             <ContentControl Content="{Binding CurrentPage}" />
         </Border>
     </Grid>

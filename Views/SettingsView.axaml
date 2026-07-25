@@ -1,15 +1,14 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:vm="using:VTFCreater.ViewModels"
-             xmlns:enum="using:VTFCreater.Enum"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="900" d:DesignHeight="700"
              x:Class="VTFCreater.Views.SettingsView"
              x:DataType="vm:SettingsViewModel">
 
-    <ScrollViewer VerticalScrollBarVisibility="Auto">
-        <StackPanel Spacing="16" Margin="0,8,0,16">
+    <ScrollViewer VerticalScrollBarVisibility="Hidden">
+        <StackPanel Spacing="16" Margin="10,0,10,0">
 
             <!-- 路径配置 -->
             <Border Classes="card">
@@ -19,7 +18,7 @@
                     <StackPanel Spacing="8">
                         <TextBlock Classes="field-label" Text="源贴图目录" />
                         <Grid ColumnDefinitions="*,Auto">
-                            <TextBox Grid.Column="0" Text="{Binding SourceDirectory}" PlaceholderText="选择包含 PNG 的文件夹（支持递归扫描）" />
+                            <TextBox BorderBrush="DarkGray" Grid.Column="0" Text="{Binding SourceDirectory}" PlaceholderText="选择包含 PNG 的文件夹（支持递归扫描）" />
                             <Button Grid.Column="1" Classes="browse" Margin="8,0,0,0" Content="浏览…" Command="{Binding BrowseSourceDirectoryCommand}" />
                         </Grid>
                     </StackPanel>
@@ -27,7 +26,7 @@
                     <StackPanel Spacing="8">
                         <TextBlock Classes="field-label" Text="输出目录" />
                         <Grid ColumnDefinitions="*,Auto">
-                            <TextBox Grid.Column="0" Text="{Binding OutputDirectory}" PlaceholderText="VTF / VMT 输出位置" />
+                            <TextBox BorderBrush="DarkGray" Grid.Column="0" Text="{Binding OutputDirectory}" PlaceholderText="VTF / VMT 输出位置" />
                             <Button Grid.Column="1" Classes="browse" Margin="8,0,0,0" Content="浏览…" Command="{Binding BrowseOutputDirectoryCommand}" />
                         </Grid>
                     </StackPanel>
@@ -35,7 +34,7 @@
                     <StackPanel Spacing="8">
                         <TextBlock Classes="field-label" Text="VTFCmd.exe 路径（一般不动）" />
                         <Grid ColumnDefinitions="*,Auto">
-                            <TextBox Grid.Column="0" Text="{Binding VtfCmdPath}" PlaceholderText="dll/x64/VTFCmd.exe" />
+                            <TextBox BorderBrush="DarkGray" Grid.Column="0" Text="{Binding VtfCmdPath}" PlaceholderText="dll/x64/VTFCmd.exe" />
                             <Button Grid.Column="1" Classes="browse" Margin="8,0,0,0" Content="浏览…" Command="{Binding BrowseVtfCmdPathCommand}" />
                         </Grid>
                     </StackPanel>
@@ -50,7 +49,8 @@
             <!-- 后缀规则 -->
             <Grid ColumnDefinitions="*,*" ColumnSpacing="16">
                 <!-- 漫反射后缀 -->
-                <Border Grid.Column="0" Classes="card">
+                <Border Grid.Column="0" Classes="card" BoxShadow="0 0 5 0 #40000000"
+                        CornerRadius="12">
                     <StackPanel Spacing="12">
                         <TextBlock Classes="page-subtitle" Text="漫反射贴图后缀" />
                         <TextBlock Classes="hint-text" Text="示例：空字符串、_d、_diffuse" TextWrapping="Wrap" />
@@ -75,7 +75,7 @@
                 </Border>
 
                 <!-- 法线后缀 -->
-                <Border Grid.Column="1" Classes="card">
+                <Border Grid.Column="1" Classes="card" BoxShadow="0 0 5 0 #40000000" CornerRadius="12">
                     <StackPanel Spacing="12">
                         <TextBlock Classes="page-subtitle" Text="法线贴图后缀" />
                         <TextBlock Classes="hint-text" Text="示例：_n、_normal、_nm" TextWrapping="Wrap" />

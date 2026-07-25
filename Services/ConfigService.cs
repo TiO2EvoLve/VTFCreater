@@ -36,7 +36,10 @@ public class ConfigService
         try
         {
             var json = File.ReadAllText(_configPath);
-            Config = JsonSerializer.Deserialize<AppConfig>(json, JsonOptions) ?? new AppConfig();
+            Config = JsonSerializer.Deserialize(
+                json,
+                AppJsonContext.Default.AppConfig
+            ) ?? new AppConfig();
         }
         catch
         {
@@ -46,7 +49,10 @@ public class ConfigService
 
     public void Save()
     {
-        var json = JsonSerializer.Serialize(Config, JsonOptions);
+        var json = JsonSerializer.Serialize(
+            Config,
+            AppJsonContext.Default.AppConfig
+        );
         File.WriteAllText(_configPath, json);
     }
 

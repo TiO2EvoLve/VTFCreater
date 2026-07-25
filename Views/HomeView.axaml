@@ -7,7 +7,7 @@
              x:Class="VTFCreater.Views.HomeView"
              x:DataType="vm:HomeViewModel">
 
-    <Grid RowDefinitions="Auto,Auto,*,Auto" Margin="0,8,0,0">
+    <Grid RowDefinitions="Auto,Auto,*,Auto" Margin="10">
 
         <!-- 概览卡片 -->
         <Border Classes="card" Grid.Row="0" Margin="0,0,0,16">
