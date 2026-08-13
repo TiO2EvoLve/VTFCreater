@@ -3,12 +3,14 @@ using System.IO;
 using System.Threading.Tasks;
 using Scriban;
 using VTFCreater.Models;
+using VTFCreater.ViewModels;
 
 namespace VTFCreater.Services;
 
 //VMT文件生成器
 public class VmtGenerator
 {
+    
     private readonly string _templatePath = Path.Combine(AppContext.BaseDirectory, "template", "simple.txt");
 
     public async Task GenerateAsync(MaterialInfo material, string outputDirectory)
@@ -17,7 +19,6 @@ public class VmtGenerator
         {
             return;
         }
-        
         var outputFolder = Path.Combine(outputDirectory, material.RelativeDirectory);
         //读取模板内容
         var templateContent = await File.ReadAllTextAsync(_templatePath);
@@ -30,10 +31,13 @@ public class VmtGenerator
             ? null
             : BuildVtfReference(material.RelativeDirectory, material.Normal);
 
+        HomeViewModel vm = IoC.Resolve<HomeViewModel>();
+        Console.WriteLine(vm.SelectedShaderTypes);
         var result = await template.RenderAsync(new
         {
-            Color = baseColorVtfPath,
-            Normal = normalVtfPath
+            type = vm.SelectedShaderTypes,
+            color = baseColorVtfPath,
+            normal = normalVtfPath
         });
 
         await File.WriteAllTextAsync(vmtPath, result);

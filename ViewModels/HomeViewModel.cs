@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -11,6 +12,13 @@ namespace VTFCreater.ViewModels;
 
 public partial class HomeViewModel : ViewModelBase
 {
+    // 下拉框当前选择的项
+    [ObservableProperty]
+    public partial ShaderType SelectedShaderTypes { get; set; }
+    // 枚举列表，下拉框绑定
+    public IEnumerable<ShaderType> ShaderTypes { get; } = System.Enum.GetValues<ShaderType>();
+    
+    
     private readonly ConfigService _configService;
     private readonly ProcessingService _processingService;
     private readonly LogService _logService;
@@ -24,6 +32,7 @@ public partial class HomeViewModel : ViewModelBase
     public string OutputDirectory => _configService.Config.OutputDirectory;
 
     public Formats Format => _configService.Config.Format;
+    
 
     public HomeViewModel(ConfigService configService, ProcessingService processingService, LogService logService)
     {
@@ -42,6 +51,7 @@ public partial class HomeViewModel : ViewModelBase
     [RelayCommand(CanExecute = nameof(CanProcess))]
     private async Task StartProcessingAsync()
     {
+        ClearLogs();
         IsProcessing = true;
         StartProcessingCommand.NotifyCanExecuteChanged();
 

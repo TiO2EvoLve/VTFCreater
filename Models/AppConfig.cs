@@ -14,11 +14,11 @@ public class AppConfig
 
     public string VTFCmdPath { get; set; } = "dll/x64/VTFCmd.exe";
 
-    public List<string> BaseColorSuffixes { get; set; } = ["", "_color", "_diffuse", "_diff", "_base"];
+    public List<string> BaseColorSuffixes { get; set; } = ["", "color", "diffuse", "diff", "base","albedo"];
 
-    public List<string> NormalSuffixes { get; set; } = ["_n", "_normal", "_nm"];
+    public List<string> NormalSuffixes { get; set; } = ["n", "normal", "bump", "bumpmap"];
 
-    [JsonConverter(typeof(JsonStringEnumConverter))]
+    [JsonConverter(typeof(JsonStringEnumConverter<Formats>))]
     public Formats Format { get; set; } = Formats.DXT1;
-    
+
 }

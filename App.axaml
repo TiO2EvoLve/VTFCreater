@@ -163,11 +163,13 @@
                 <Setter Property="FontWeight" Value="SemiBold" />
                 <Setter Property="Cursor" Value="Hand" />
             </Style>
-            <Style Selector="Button.primary:pointerover">
+            <Style Selector="Button.primary:pointerover ContentPresenter">
                 <Setter Property="Background" Value="#FF7A45" />
+                <Setter Property="Foreground" Value="White" />
             </Style>
             <Style Selector="Button.primary:disabled">
                 <Setter Property="Opacity" Value="0.45" />
+                <Setter Property="Foreground" Value="White" />
             </Style>
 
             <Style Selector="Button.secondary">
@@ -178,7 +180,7 @@
                 <Setter Property="Padding" Value="14,8" />
                 <Setter Property="Cursor" Value="Hand" />
             </Style>
-            <Style Selector="Button.secondary:pointerover">
+            <Style Selector="Button.secondary:pointerover ContentPresenter">
                 <Setter Property="Background" Value="#30FFFFFF" />
             </Style>
 

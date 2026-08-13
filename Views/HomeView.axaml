@@ -7,16 +7,17 @@
              x:Class="VTFCreater.Views.HomeView"
              x:DataType="vm:HomeViewModel">
 
-    <Grid RowDefinitions="Auto,Auto,*,Auto" Margin="10">
+    <Grid RowDefinitions="Auto,Auto,Auto,*,Auto" Margin="10" RowSpacing="16">
 
         <!-- 概览卡片 -->
-        <Border Classes="card" Grid.Row="0" Margin="0,0,0,16">
+        <Border Classes="card">
             <Grid ColumnDefinitions="*,*,Auto" RowDefinitions="Auto,Auto">
                 <TextBlock Grid.Row="0" Grid.Column="0" Classes="section-title" Text="源贴图目录" />
                 <TextBlock Grid.Row="1" Grid.Column="0" Classes="path-text" Text="{Binding SourceDirectory}" />
 
                 <TextBlock Grid.Row="0" Grid.Column="1" Classes="section-title" Text="输出目录" Margin="24,0,0,0" />
-                <TextBlock Grid.Row="1" Grid.Column="1" Classes="path-text" Text="{Binding OutputDirectory}" Margin="24,0,0,0" />
+                <TextBlock Grid.Row="1" Grid.Column="1" Classes="path-text" Text="{Binding OutputDirectory}"
+                           Margin="24,0,0,0" />
 
                 <StackPanel Grid.Row="0" Grid.RowSpan="2" Grid.Column="2" VerticalAlignment="Center" Spacing="4">
                     <TextBlock Classes="section-title" Text="VTF 格式" HorizontalAlignment="Right" />
@@ -24,9 +25,13 @@
                 </StackPanel>
             </Grid>
         </Border>
-
+        <!-- 配置区 -->
+        <StackPanel Grid.Row="1" Orientation="Horizontal" Spacing="12">
+            <TextBlock Classes="section-title" Text="贴图类型" VerticalAlignment="Center" />
+            <ComboBox ItemsSource="{Binding ShaderTypes}" SelectedItem="{Binding SelectedShaderTypes}" Width="120" />
+        </StackPanel>
         <!-- 操作区 -->
-        <StackPanel Grid.Row="1" Orientation="Horizontal" Spacing="12" Margin="0,0,0,16">
+        <StackPanel Grid.Row="2" Orientation="Horizontal" Spacing="12">
             <Button Classes="primary" Command="{Binding StartProcessingCommand}" IsEnabled="{Binding !IsProcessing}">
                 <StackPanel Orientation="Horizontal" Spacing="8">
                     <PathIcon Data="M8,5.14V19.14L19,12.14L8,5.14Z" Width="16" Height="16" />
@@ -34,11 +39,12 @@
                 </StackPanel>
             </Button>
             <Button Classes="secondary" Command="{Binding ClearLogsCommand}" Content="清空日志" />
-            <ProgressBar IsIndeterminate="True" IsVisible="{Binding IsProcessing}" Width="120" Height="4" VerticalAlignment="Center" />
+            <ProgressBar IsIndeterminate="True" IsVisible="{Binding IsProcessing}" Width="120" Height="4"
+                         VerticalAlignment="Center" />
         </StackPanel>
 
         <!-- 日志面板 -->
-        <Border Grid.Row="2" BorderThickness="1" BorderBrush="#FF7A45" Classes="card log-card">
+        <Border Grid.Row="3" BorderThickness="1" BorderBrush="#FF7A45" Classes="card log-card">
             <Grid RowDefinitions="Auto,*">
                 <TextBlock Grid.Row="0" Classes="section-title" Text="运行日志" Margin="0,0,0,12" />
                 <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
@@ -53,7 +59,7 @@
             </Grid>
         </Border>
 
-        <TextBlock Grid.Row="3" Classes="hint-text" Margin="0,12,0,0"
+        <TextBlock Grid.Row="4" Classes="hint-text"
                    Text="提示：可在「设置」中配置目录、后缀规则与 VTFCmd 路径。" />
     </Grid>
 </UserControl>

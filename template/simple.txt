@@ -1,4 +1,5 @@
-LightmappedGeneric
+{{if type == "texture"}}LightmappedGeneric{{ end }}
+{{if type == "model"}}VertexLitGeneric{{ end }}
 {
 	$basetexture "{{ color }}"
 {{ if normal }}

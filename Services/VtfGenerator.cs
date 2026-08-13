@@ -1,6 +1,7 @@
 using System;
 using System.Diagnostics;
 using System.IO;
+using System.Threading.Tasks;
 using VTFCreater.Enum;
 
 namespace VTFCreater.Services;
@@ -8,7 +9,7 @@ namespace VTFCreater.Services;
 //VTF文件生成器
 public class VtfGenerator
 {
-    public void Generate(string vtfCmdPath, string sourceFilePath, string outputFilePath, Formats format)
+    public async Task Generate(string vtfCmdPath, string sourceFilePath, string outputFilePath, Formats format = Formats.DXT1,string width = "1024", string height = "1024")
     {
         if (!Directory.Exists(outputFilePath))
         {
@@ -37,16 +38,19 @@ public class VtfGenerator
         cmd.ArgumentList.Add(outputFilePath);
         cmd.ArgumentList.Add("-format");
         cmd.ArgumentList.Add(format.ToString());
-        
-        Console.WriteLine(cmd.Arguments);
-        using var process = Process.Start(cmd)
-                              ?? throw new InvalidOperationException("无法启动 VTFCmd 进程。");
+        cmd.ArgumentList.Add("-resize");
+        cmd.ArgumentList.Add("-rclampwidth");
+        cmd.ArgumentList.Add(width);
+        cmd.ArgumentList.Add("-rclampheight");
+        cmd.ArgumentList.Add(height);
 
-        process.WaitForExit();
+        using var process = Process.Start(cmd) ?? throw new InvalidOperationException("无法启动 VTFCmd 进程。");
+
+        await process.WaitForExitAsync();
 
         if (process.ExitCode != 0)
         {
-            var error = process.StandardError.ReadToEnd();
+            var error = await process.StandardError.ReadToEndAsync();
             throw new InvalidOperationException(
                 $"VTF 转换失败（{Path.GetFileName(sourceFilePath)}，退出码 {process.ExitCode}）：{error}");
         }
