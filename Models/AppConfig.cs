@@ -21,4 +21,7 @@ public class AppConfig
     [JsonConverter(typeof(JsonStringEnumConverter<Formats>))]
     public Formats Format { get; set; } = Formats.DXT1;
 
+    [JsonConverter(typeof(JsonStringEnumConverter<ShaderType>))]
+    public ShaderType ShaderType { get; set; } = ShaderType.texture;
+
 }

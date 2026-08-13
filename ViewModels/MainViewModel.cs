@@ -14,14 +14,11 @@ public partial class MainViewModel : ViewModelBase
 
     public SettingsViewModel Settings { get; }
 
-    public MainViewModel()
+    public MainViewModel(ConfigService configService, HomeViewModel home, SettingsViewModel settings)
     {
-        _configService = new ConfigService();
-        var logService = new LogService();
-        var processingService = new ProcessingService();
-
-        Home = new HomeViewModel(_configService, processingService, logService);
-        Settings = new SettingsViewModel(_configService);
+        _configService = configService;
+        Home = home;
+        Settings = settings;
         _currentPage = Home;
     }
 

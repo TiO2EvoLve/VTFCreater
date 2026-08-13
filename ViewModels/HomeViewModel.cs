@@ -17,8 +17,6 @@ public partial class HomeViewModel : ViewModelBase
     public partial ShaderType SelectedShaderTypes { get; set; }
     // 枚举列表，下拉框绑定
     public IEnumerable<ShaderType> ShaderTypes { get; } = System.Enum.GetValues<ShaderType>();
-    
-    
     private readonly ConfigService _configService;
     private readonly ProcessingService _processingService;
     private readonly LogService _logService;

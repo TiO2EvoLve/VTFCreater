@@ -18,24 +18,16 @@ public partial class App : Application
 
     public override void OnFrameworkInitializationCompleted()
     {
-        RegisterMyServices();
+        IoC.RegisterServices();
 
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
             desktop.MainWindow = new MainWindow
             {
-                DataContext = new MainViewModel(),
+                DataContext = IoC.Resolve<MainViewModel>()
             };
         }
+
         base.OnFrameworkInitializationCompleted();
-    }
-    private void RegisterMyServices()
-    {
-        IoC.Container.Register<MainWindow>(Reuse.Singleton);
-        IoC.Container.Register<HomeViewModel>(Reuse.Singleton);
-        IoC.Container.Register<ConfigService>(Reuse.Singleton);
-        IoC.Container.Register<ProcessingService>(Reuse.Singleton);
-        IoC.Container.Register<LogService>(Reuse.Singleton);
-        
     }
 }

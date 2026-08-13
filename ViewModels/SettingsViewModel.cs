@@ -154,6 +154,7 @@ public partial class SettingsViewModel : ViewModelBase
             OutputDirectory = OutputDirectory,
             VTFCmdPath = VtfCmdPath,
             Format = Format,
+            ShaderType = _configService.Config.ShaderType,
             BaseColorSuffixes = BaseColorSuffixes.ToList(),
             NormalSuffixes = NormalSuffixes.ToList()
         });
