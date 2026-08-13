@@ -13,8 +13,21 @@
             <!-- 路径配置 -->
             <Border Classes="card">
                 <StackPanel Spacing="16">
-                    <TextBlock Classes="page-subtitle" Text="路径配置" />
-
+                    <Canvas HorizontalAlignment="Stretch" Margin="0,0,0,30">
+                        <TextBlock Canvas.Left="0" Classes="page-subtitle" Text="路径配置" FontSize="20" VerticalAlignment="Center" />
+                        <StackPanel Canvas.Right="10" Orientation="Horizontal" Spacing="10">
+                            <TextBlock Classes="status-text" Text="{Binding StatusMessage}"
+                                       VerticalAlignment="Center" />
+                            <Button Classes="primary" Content="保存配置"
+                                    Command="{Binding SaveConfigCommand}" />
+                                <Button Classes="secondary" Content="恢复默认"
+                                        Command="{Binding ResetCommand}" />
+                                <Button Classes="secondary" Content="重新加载"
+                                        Command="{Binding ReloadConfigCommand}" />
+                        </StackPanel>
+                          
+                    </Canvas>
+                    
                     <StackPanel Spacing="8">
                         <TextBlock Classes="field-label" Text="源贴图目录" />
                         <Grid ColumnDefinitions="*,Auto">
@@ -45,7 +58,7 @@
                         </Grid>
                     </StackPanel>
                     <StackPanel Spacing="8" Orientation="Horizontal">
-                        <StackPanel Spacing="8" >
+                        <StackPanel Spacing="8">
                             <TextBlock Classes="field-label" Text="VTF 压缩格式" />
                             <ComboBox ItemsSource="{Binding FormatsOption}" SelectedItem="{Binding Format}"
                                       HorizontalAlignment="Left" MinWidth="160" />
@@ -117,19 +130,6 @@
                     </StackPanel>
                 </Border>
             </Grid>
-
-            <!-- 保存操作 -->
-            <Border Classes="card">
-                <Grid ColumnDefinitions="*,Auto,Auto,Auto">
-                    <TextBlock Grid.Column="0" Classes="status-text" Text="{Binding StatusMessage}"
-                               VerticalAlignment="Center" />
-                    <Button Grid.Column="1" Classes="secondary" Margin="0,0,8,0" Content="恢复默认"
-                            Command="{Binding ResetCommand}" />
-                    <Button Grid.Column="2" Classes="secondary" Margin="0,0,8,0" Content="重新加载"
-                            Command="{Binding ReloadConfigCommand}" />
-                    <Button Grid.Column="3" Classes="primary" Content="保存配置" Command="{Binding SaveConfigCommand}" />
-                </Grid>
-            </Border>
         </StackPanel>
     </ScrollViewer>
 </UserControl>
