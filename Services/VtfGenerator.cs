@@ -9,7 +9,7 @@ namespace VTFCreater.Services;
 //VTF文件生成器
 public class VtfGenerator
 {
-    public async Task Generate(string vtfCmdPath, string sourceFilePath, string outputFilePath, Formats format = Formats.DXT1,string width = "1024", string height = "1024")
+    public async Task Generate(string vtfCmdPath, string sourceFilePath, string outputFilePath, Formats format = Formats.DXT1,SizeClamp sizeClamp = SizeClamp.x1024)
     {
         if (!Directory.Exists(outputFilePath))
         {
@@ -40,9 +40,9 @@ public class VtfGenerator
         cmd.ArgumentList.Add(format.ToString());
         cmd.ArgumentList.Add("-resize");
         cmd.ArgumentList.Add("-rclampwidth");
-        cmd.ArgumentList.Add(width);
+        cmd.ArgumentList.Add(sizeClamp.ToString().Replace("x",""));
         cmd.ArgumentList.Add("-rclampheight");
-        cmd.ArgumentList.Add(height);
+        cmd.ArgumentList.Add(sizeClamp.ToString().Replace("x",""));
 
         using var process = Process.Start(cmd) ?? throw new InvalidOperationException("无法启动 VTFCmd 进程。");
 

@@ -11,8 +11,8 @@ public enum Formats
     I8, 
     IA88, 
     A8,
-    RGB888_BLUESCREEN,
-    BGR888_BLUESCREEN,
+    RGB888xBLUESCREEN,
+    BGR888xBLUESCREEN,
     ARGB8888, BGRA8888, 
     DXT1,
     DXT3,
@@ -21,11 +21,29 @@ public enum Formats
     BGR565, 
     BGRX5551, 
     BGRA4444,
-    DXT1_ONEBITALPHA,
+    DXT1xONEBITALPHA,
     BGRA5551,
     UV88,
     UVWQ8888, 
     RGBA16161616F, 
     RGBA16161616,
     UVLX8888
+}
+
+public enum ShaderType
+{
+    texture,
+    model
+}
+
+public enum SizeClamp
+{
+    x16,
+    x32,
+    x64,
+    x128,
+    x512,
+    x1024,
+    x2048,
+    x4096
 }

@@ -35,7 +35,11 @@ public partial class SettingsViewModel : ViewModelBase
     
     [ObservableProperty] private Formats _format = Formats.DXT1;
 
-    public Formats[] AvailableFormats { get; } = [Formats.DXT1, Formats.DXT5];
+    public Formats[] FormatsOption { get; } = [Formats.DXT1, Formats.DXT5];
+    
+    [ObservableProperty] private SizeClamp _sizeClamp = SizeClamp.x1024;
+
+    public SizeClamp[] SizeClampsOption { get; } = [SizeClamp.x16,SizeClamp.x32,SizeClamp.x64,SizeClamp.x128,SizeClamp.x512,SizeClamp.x1024,SizeClamp.x2048,SizeClamp.x4096];
     
     public SettingsViewModel(ConfigService configService)
     {
@@ -51,7 +55,7 @@ public partial class SettingsViewModel : ViewModelBase
         OutputDirectory = config.OutputDirectory;
         VtfCmdPath = config.VTFCmdPath;
         Format = config.Format;
-
+        SizeClamp = config.SizeClamp;
         BaseColorSuffixes.Clear();
         foreach (var suffix in config.BaseColorSuffixes)
         {
@@ -154,7 +158,7 @@ public partial class SettingsViewModel : ViewModelBase
             OutputDirectory = OutputDirectory,
             VTFCmdPath = VtfCmdPath,
             Format = Format,
-            ShaderType = _configService.Config.ShaderType,
+            SizeClamp = SizeClamp,
             BaseColorSuffixes = BaseColorSuffixes.ToList(),
             NormalSuffixes = NormalSuffixes.ToList()
         });

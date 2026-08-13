@@ -18,31 +18,45 @@
                     <StackPanel Spacing="8">
                         <TextBlock Classes="field-label" Text="源贴图目录" />
                         <Grid ColumnDefinitions="*,Auto">
-                            <TextBox BorderBrush="DarkGray" Grid.Column="0" Text="{Binding SourceDirectory}" PlaceholderText="选择包含 PNG 的文件夹（支持递归扫描）" />
-                            <Button Grid.Column="1" Classes="browse" Margin="8,0,0,0" Content="浏览…" Command="{Binding BrowseSourceDirectoryCommand}" />
+                            <TextBox BorderBrush="DarkGray" Grid.Column="0" Text="{Binding SourceDirectory}"
+                                     PlaceholderText="选择包含 PNG 的文件夹（支持递归扫描）" />
+                            <Button Grid.Column="1" Classes="browse" Margin="8,0,0,0" Content="浏览…"
+                                    Command="{Binding BrowseSourceDirectoryCommand}" />
                         </Grid>
                     </StackPanel>
 
                     <StackPanel Spacing="8">
                         <TextBlock Classes="field-label" Text="输出目录" />
                         <Grid ColumnDefinitions="*,Auto">
-                            <TextBox BorderBrush="DarkGray" Grid.Column="0" Text="{Binding OutputDirectory}" PlaceholderText="VTF / VMT 输出位置" />
-                            <Button Grid.Column="1" Classes="browse" Margin="8,0,0,0" Content="浏览…" Command="{Binding BrowseOutputDirectoryCommand}" />
+                            <TextBox BorderBrush="DarkGray" Grid.Column="0" Text="{Binding OutputDirectory}"
+                                     PlaceholderText="VTF / VMT 输出位置" />
+                            <Button Grid.Column="1" Classes="browse" Margin="8,0,0,0" Content="浏览…"
+                                    Command="{Binding BrowseOutputDirectoryCommand}" />
                         </Grid>
                     </StackPanel>
 
                     <StackPanel Spacing="8">
                         <TextBlock Classes="field-label" Text="VTFCmd.exe 路径（一般不动）" />
                         <Grid ColumnDefinitions="*,Auto">
-                            <TextBox BorderBrush="DarkGray" Grid.Column="0" Text="{Binding VtfCmdPath}" PlaceholderText="dll/x64/VTFCmd.exe" />
-                            <Button Grid.Column="1" Classes="browse" Margin="8,0,0,0" Content="浏览…" Command="{Binding BrowseVtfCmdPathCommand}" />
+                            <TextBox BorderBrush="DarkGray" Grid.Column="0" Text="{Binding VtfCmdPath}"
+                                     PlaceholderText="dll/x64/VTFCmd.exe" />
+                            <Button Grid.Column="1" Classes="browse" Margin="8,0,0,0" Content="浏览…"
+                                    Command="{Binding BrowseVtfCmdPathCommand}" />
                         </Grid>
                     </StackPanel>
-                    <StackPanel Spacing="8">
-                        <TextBlock Classes="field-label" Text="VTF 压缩格式" />
-                        <ComboBox ItemsSource="{Binding AvailableFormats}" SelectedItem="{Binding Format}" HorizontalAlignment="Left" MinWidth="160" />
+                    <StackPanel Spacing="8" Orientation="Horizontal">
+                        <StackPanel Spacing="8" >
+                            <TextBlock Classes="field-label" Text="VTF 压缩格式" />
+                            <ComboBox ItemsSource="{Binding FormatsOption}" SelectedItem="{Binding Format}"
+                                      HorizontalAlignment="Left" MinWidth="160" />
+                        </StackPanel>
+                        <StackPanel Spacing="8">
+                            <TextBlock Classes="field-label" Text="最大分辨率限制" />
+                            <ComboBox ItemsSource="{Binding SizeClampsOption}" SelectedItem="{Binding SizeClamp}"
+                                      HorizontalAlignment="Left" MinWidth="160" />
+                        </StackPanel>
                     </StackPanel>
-                    
+
                 </StackPanel>
             </Border>
 
@@ -68,8 +82,10 @@
 
                         <Grid ColumnDefinitions="*,Auto,Auto">
                             <TextBox Grid.Column="0" Text="{Binding NewBaseColorSuffix}" PlaceholderText="添加新后缀…" />
-                            <Button Grid.Column="1" Classes="secondary" Margin="8,0,0,0" Content="添加" Command="{Binding AddBaseColorSuffixCommand}" />
-                            <Button Grid.Column="2" Classes="secondary" Margin="8,0,0,0" Content="删除" Command="{Binding RemoveBaseColorSuffixCommand}" />
+                            <Button Grid.Column="1" Classes="secondary" Margin="8,0,0,0" Content="添加"
+                                    Command="{Binding AddBaseColorSuffixCommand}" />
+                            <Button Grid.Column="2" Classes="secondary" Margin="8,0,0,0" Content="删除"
+                                    Command="{Binding RemoveBaseColorSuffixCommand}" />
                         </Grid>
                     </StackPanel>
                 </Border>
@@ -93,8 +109,10 @@
 
                         <Grid ColumnDefinitions="*,Auto,Auto">
                             <TextBox Grid.Column="0" Text="{Binding NewNormalSuffix}" PlaceholderText="添加新后缀…" />
-                            <Button Grid.Column="1" Classes="secondary" Margin="8,0,0,0" Content="添加" Command="{Binding AddNormalSuffixCommand}" />
-                            <Button Grid.Column="2" Classes="secondary" Margin="8,0,0,0" Content="删除" Command="{Binding RemoveNormalSuffixCommand}" />
+                            <Button Grid.Column="1" Classes="secondary" Margin="8,0,0,0" Content="添加"
+                                    Command="{Binding AddNormalSuffixCommand}" />
+                            <Button Grid.Column="2" Classes="secondary" Margin="8,0,0,0" Content="删除"
+                                    Command="{Binding RemoveNormalSuffixCommand}" />
                         </Grid>
                     </StackPanel>
                 </Border>
@@ -103,9 +121,12 @@
             <!-- 保存操作 -->
             <Border Classes="card">
                 <Grid ColumnDefinitions="*,Auto,Auto,Auto">
-                    <TextBlock Grid.Column="0" Classes="status-text" Text="{Binding StatusMessage}" VerticalAlignment="Center" />
-                    <Button Grid.Column="1" Classes="secondary" Margin="0,0,8,0" Content="恢复默认" Command="{Binding ResetCommand}"/>
-                    <Button Grid.Column="2" Classes="secondary" Margin="0,0,8,0" Content="重新加载" Command="{Binding ReloadConfigCommand}" />
+                    <TextBlock Grid.Column="0" Classes="status-text" Text="{Binding StatusMessage}"
+                               VerticalAlignment="Center" />
+                    <Button Grid.Column="1" Classes="secondary" Margin="0,0,8,0" Content="恢复默认"
+                            Command="{Binding ResetCommand}" />
+                    <Button Grid.Column="2" Classes="secondary" Margin="0,0,8,0" Content="重新加载"
+                            Command="{Binding ReloadConfigCommand}" />
                     <Button Grid.Column="3" Classes="primary" Content="保存配置" Command="{Binding SaveConfigCommand}" />
                 </Grid>
             </Border>

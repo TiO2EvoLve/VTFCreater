@@ -7,11 +7,15 @@
              x:Class="VTFCreater.Views.HomeView"
              x:DataType="vm:HomeViewModel">
 
+    <Design.DataContext>
+        <vm:HomeViewModel />
+    </Design.DataContext>
+
     <Grid RowDefinitions="Auto,Auto,Auto,*,Auto" Margin="10" RowSpacing="16">
 
         <!-- 概览卡片 -->
         <Border Classes="card">
-            <Grid ColumnDefinitions="*,*,Auto" RowDefinitions="Auto,Auto">
+            <Grid ColumnDefinitions="*,*,Auto,Auto" RowDefinitions="Auto,Auto" ColumnSpacing="12">
                 <TextBlock Grid.Row="0" Grid.Column="0" Classes="section-title" Text="源贴图目录" />
                 <TextBlock Grid.Row="1" Grid.Column="0" Classes="path-text" Text="{Binding SourceDirectory}" />
 
@@ -20,8 +24,13 @@
                            Margin="24,0,0,0" />
 
                 <StackPanel Grid.Row="0" Grid.RowSpan="2" Grid.Column="2" VerticalAlignment="Center" Spacing="4">
-                    <TextBlock Classes="section-title" Text="VTF 格式" HorizontalAlignment="Right" />
-                    <TextBlock Classes="format-badge" Text="{Binding Format}" HorizontalAlignment="Right" />
+                    <TextBlock Classes="section-title" Text="VTF 格式" HorizontalAlignment="Center" />
+                    <TextBlock Classes="format-badge" Text="{Binding Format}" HorizontalAlignment="Center" />
+                </StackPanel>
+                
+                <StackPanel Grid.Row="0" Grid.RowSpan="2" Grid.Column="3" VerticalAlignment="Center" Spacing="4">
+                    <TextBlock Classes="section-title" Text="大小限制" HorizontalAlignment="Center" />
+                    <TextBlock Classes="format-badge" Text="1024" HorizontalAlignment="Center" />
                 </StackPanel>
             </Grid>
         </Border>

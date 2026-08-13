@@ -76,13 +76,13 @@ public class ProcessingService
             if (material.BaseColor is not null)
             {
                 var outputPath = BuildOutputPath(config.OutputDirectory, material.BaseColor);
-                await _vtfGenerator.Generate(config.VTFCmdPath, material.BaseColor.FullPath, outputPath, config.Format);
+                await _vtfGenerator.Generate(config.VTFCmdPath, material.BaseColor.FullPath, outputPath, config.Format,config.SizeClamp);
                 logService.Info($"生成：{Path.GetFileName(outputPath)}");
             }
             if (material.Normal is not null)
             {
                 var outputPath = BuildOutputPath(config.OutputDirectory, material.Normal);
-                await _vtfGenerator.Generate(config.VTFCmdPath, material.Normal.FullPath, outputPath, config.Format);
+                await _vtfGenerator.Generate(config.VTFCmdPath, material.Normal.FullPath, outputPath, config.Format,config.SizeClamp);
                 logService.Info($"生成：{Path.GetFileName(outputPath)}");
             }
             if (material.ShouldGenerateVmt)
