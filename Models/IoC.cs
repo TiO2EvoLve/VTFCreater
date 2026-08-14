@@ -13,7 +13,9 @@ public static class IoC
         Container.Register<ConfigService>(Reuse.Singleton);
         Container.Register<LogService>(Reuse.Singleton);
         Container.Register<ProcessingService>(Reuse.Singleton);
+        Container.Register<MaterialProcessingService>(Reuse.Singleton);
         Container.Register<HomeViewModel>(Reuse.Singleton);
+        Container.Register<MaterialEditorViewModel>(Reuse.Singleton);
         Container.Register<SettingsViewModel>(Reuse.Singleton);
         Container.Register<MainViewModel>(Reuse.Singleton);
     }

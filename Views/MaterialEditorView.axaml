@@ -1,0 +1,73 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:VTFCreater.ViewModels"
+             xmlns:models="using:VTFCreater.Models"
+             x:Class="VTFCreater.Views.MaterialEditorView"
+             x:DataType="vm:MaterialEditorViewModel">
+  <Grid RowDefinitions="Auto,*,Auto" RowSpacing="14">
+    <Grid ColumnDefinitions="*,Auto" ColumnSpacing="16">
+      <StackPanel Spacing="3">
+        <TextBlock Classes="page-subtitle" Text="材质编辑器" />
+        <TextBlock Classes="hint-text" Text="按插槽指定贴图类型；文件名仅用于读取图片，不参与类型判断。" />
+      </StackPanel>
+      <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
+        <TextBlock Classes="field-label" Text="材质名称" VerticalAlignment="Center" />
+        <TextBox Width="180" Text="{Binding MaterialName}" PlaceholderText="例如 wall" />
+      </StackPanel>
+    </Grid>
+
+    <Grid Grid.Row="1" ColumnDefinitions="2*,3*" ColumnSpacing="14">
+      <Border Classes="card">
+        <Grid RowDefinitions="Auto,*" RowSpacing="10">
+          <TextBlock Classes="page-subtitle" Text="Material Slots" />
+          <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+            <ItemsControl ItemsSource="{Binding Slots}">
+              <ItemsControl.ItemTemplate>
+                <DataTemplate x:DataType="models:MaterialSlot">
+                  <Border Classes="slot-card" DragDrop.AllowDrop="True" Tag="{Binding Key}" DragDrop.DragOver="Slot_DragOver" DragDrop.Drop="Slot_Drop">
+                    <Grid ColumnDefinitions="82,*,Auto" ColumnSpacing="12">
+                      <Border Classes="slot-preview">
+                        <Image Source="{Binding Preview}" Stretch="UniformToFill" IsVisible="{Binding HasFile}" />
+                      </Border>
+                      <StackPanel Grid.Column="1" VerticalAlignment="Center" Spacing="4">
+                        <StackPanel Orientation="Horizontal" Spacing="6">
+                          <TextBlock FontWeight="SemiBold" Text="{Binding DisplayName}" />
+                          <TextBlock Foreground="#FA541C" Text="必填" IsVisible="{Binding IsRequired}" />
+                        </StackPanel>
+                        <TextBlock Classes="hint-text" Text="{Binding FileName}" TextTrimming="CharacterEllipsis" MaxWidth="190" />
+                      </StackPanel>
+                      <StackPanel Grid.Column="2" Orientation="Horizontal" Spacing="6" VerticalAlignment="Center">
+                        <Button Classes="browse" Padding="10,6" Command="{Binding $parent[UserControl].((vm:MaterialEditorViewModel)DataContext).BrowseSlotCommand}" CommandParameter="{Binding}" Content="选择图片" />
+                        <Button Classes="secondary" Padding="10,6" Command="{Binding $parent[UserControl].((vm:MaterialEditorViewModel)DataContext).ClearSlotCommand}" CommandParameter="{Binding}" Content="清空" />
+                      </StackPanel>
+                    </Grid>
+                  </Border>
+                </DataTemplate>
+              </ItemsControl.ItemTemplate>
+            </ItemsControl>
+          </ScrollViewer>
+        </Grid>
+      </Border>
+
+      <Border Grid.Column="1" Classes="card">
+        <StackPanel Spacing="14">
+          <TextBlock Classes="page-subtitle" Text="Preview / Settings" />
+          <TextBlock Classes="field-label" Text="Material Type" />
+          <ComboBox ItemsSource="{Binding Shaders}" SelectedItem="{Binding SelectedShader}" />
+          <TextBlock Classes="field-label" Text="VTF Format" />
+          <ComboBox ItemsSource="{Binding Formats}" SelectedItem="{Binding SelectedFormat}" />
+          <TextBlock Classes="field-label" Text="分辨率限制" />
+          <ComboBox ItemsSource="{Binding SizeClamps}" SelectedItem="{Binding SelectedSizeClamp}" />
+          <Border Classes="advanced-note">
+            <TextBlock Classes="hint-text" TextWrapping="Wrap" Text="VTF 格式与尺寸设置会应用到所有已填充的插槽。VMT 会根据现有插槽动态生成。" />
+          </Border>
+        </StackPanel>
+      </Border>
+    </Grid>
+
+    <Grid Grid.Row="2" ColumnDefinitions="*,Auto" ColumnSpacing="12">
+      <TextBlock Classes="status-text" Text="{Binding StatusMessage}" TextWrapping="Wrap" VerticalAlignment="Center" />
+      <Button Grid.Column="1" Classes="primary" Command="{Binding GenerateCommand}" IsEnabled="{Binding !IsGenerating}" Content="保存并生成" />
+    </Grid>
+  </Grid>
+</UserControl>

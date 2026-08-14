@@ -104,6 +104,34 @@
                 <Setter Property="MinHeight" Value="240" />
             </Style>
 
+            <Style Selector="Border.slot-card">
+                <Setter Property="Background" Value="#10FFFFFF" />
+                <Setter Property="BorderBrush" Value="#28FFFFFF" />
+                <Setter Property="BorderThickness" Value="1" />
+                <Setter Property="CornerRadius" Value="8" />
+                <Setter Property="Padding" Value="10" />
+                <Setter Property="Margin" Value="0,0,0,8" />
+            </Style>
+            <Style Selector="Border.slot-card:pointerover">
+                <Setter Property="BorderBrush" Value="#FA541C" />
+                <Setter Property="Background" Value="#18FA541C" />
+            </Style>
+            <Style Selector="Border.slot-preview">
+                <Setter Property="Width" Value="82" />
+                <Setter Property="Height" Value="58" />
+                <Setter Property="CornerRadius" Value="6" />
+                <Setter Property="Background" Value="#25000000" />
+                <Setter Property="BorderBrush" Value="#30FFFFFF" />
+                <Setter Property="BorderThickness" Value="1" />
+            </Style>
+            <Style Selector="Border.advanced-note">
+                <Setter Property="Background" Value="#12FA541C" />
+                <Setter Property="BorderBrush" Value="#35FA541C" />
+                <Setter Property="BorderThickness" Value="1" />
+                <Setter Property="CornerRadius" Value="8" />
+                <Setter Property="Padding" Value="12" />
+            </Style>
+
             <!-- 文字样式 -->
             <Style Selector="TextBlock.section-title">
                 <Setter Property="FontSize" Value="12" />

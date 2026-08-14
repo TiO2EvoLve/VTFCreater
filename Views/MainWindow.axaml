@@ -34,6 +34,7 @@
 
                 <StackPanel  Orientation="Horizontal" HorizontalAlignment="Center" Spacing="4" VerticalAlignment="Center">
                     <Button Classes="nav-tab" Classes.active="{Binding IsHomeActive}" Command="{Binding NavigateHomeCommand}" Content="工作台" />
+                    <Button Classes="nav-tab" Classes.active="{Binding IsMaterialEditorActive}" Command="{Binding NavigateMaterialEditorCommand}" Content="材质编辑器" />
                     <Button Classes="nav-tab" Classes.active="{Binding IsSettingsActive}" Command="{Binding NavigateSettingsCommand}" Content="设置" />
                 </StackPanel>
 

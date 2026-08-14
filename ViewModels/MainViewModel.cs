@@ -14,11 +14,15 @@ public partial class MainViewModel : ViewModelBase
 
     public SettingsViewModel Settings { get; }
 
-    public MainViewModel(ConfigService configService, HomeViewModel home, SettingsViewModel settings)
+    public MaterialEditorViewModel MaterialEditor { get; }
+
+    public MainViewModel(ConfigService configService, HomeViewModel home, SettingsViewModel settings,
+        MaterialEditorViewModel materialEditor)
     {
         _configService = configService;
         Home = home;
         Settings = settings;
+        MaterialEditor = materialEditor;
         _currentPage = Home;
     }
 
@@ -36,13 +40,22 @@ public partial class MainViewModel : ViewModelBase
         CurrentPage = Settings;
     }
 
+    [RelayCommand]
+    private void NavigateMaterialEditor()
+    {
+        CurrentPage = MaterialEditor;
+    }
+
     public bool IsHomeActive => ReferenceEquals(CurrentPage, Home);
 
     public bool IsSettingsActive => ReferenceEquals(CurrentPage, Settings);
+
+    public bool IsMaterialEditorActive => ReferenceEquals(CurrentPage, MaterialEditor);
 
     partial void OnCurrentPageChanged(ViewModelBase value)
     {
         OnPropertyChanged(nameof(IsHomeActive));
         OnPropertyChanged(nameof(IsSettingsActive));
+        OnPropertyChanged(nameof(IsMaterialEditorActive));
     }
 }
