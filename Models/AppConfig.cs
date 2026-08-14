@@ -14,9 +14,9 @@ public class AppConfig
 
     public string VTFCmdPath { get; set; } = "dll/x64/VTFCmd.exe";
 
-    public List<string> BaseColorSuffixes { get; set; } = ["", "color", "diffuse", "diff", "base","albedo"];
+    public List<string> BaseColorSuffixes { get; set; } = ["", "_color", "_diffuse", "_diff", "_base","_albedo"];
 
-    public List<string> NormalSuffixes { get; set; } = ["n", "normal", "bump", "bumpmap"];
+    public List<string> NormalSuffixes { get; set; } = ["_n", "_normal", "_bump", "_bumpmap"];
 
     [JsonConverter(typeof(JsonStringEnumConverter<Formats>))]
     public Formats Format { get; set; } = Formats.DXT1;

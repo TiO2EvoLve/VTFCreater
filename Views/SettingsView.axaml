@@ -32,7 +32,7 @@
                         <TextBlock Classes="field-label" Text="源贴图目录" />
                         <Grid ColumnDefinitions="*,Auto">
                             <TextBox BorderBrush="DarkGray" Grid.Column="0" Text="{Binding SourceDirectory}"
-                                     PlaceholderText="选择包含 PNG 的文件夹（支持递归扫描）" />
+                                     PlaceholderText="选择源文件目录文件夹" />
                             <Button Grid.Column="1" Classes="browse" Margin="8,0,0,0" Content="浏览…"
                                     Command="{Binding BrowseSourceDirectoryCommand}" />
                         </Grid>
@@ -42,7 +42,7 @@
                         <TextBlock Classes="field-label" Text="输出目录" />
                         <Grid ColumnDefinitions="*,Auto">
                             <TextBox BorderBrush="DarkGray" Grid.Column="0" Text="{Binding OutputDirectory}"
-                                     PlaceholderText="VTF / VMT 输出位置" />
+                                     PlaceholderText="选择要输出的Materials文件夹" />
                             <Button Grid.Column="1" Classes="browse" Margin="8,0,0,0" Content="浏览…"
                                     Command="{Binding BrowseOutputDirectoryCommand}" />
                         </Grid>

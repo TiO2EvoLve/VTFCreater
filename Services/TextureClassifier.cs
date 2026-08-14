@@ -51,7 +51,7 @@ public static class TextureClassifier
                 continue;
             }
 
-            if (fileName.Contains(suffix, StringComparison.OrdinalIgnoreCase))
+            if (fileName.EndsWith(suffix, StringComparison.OrdinalIgnoreCase))
             {
                 return suffix;
             }

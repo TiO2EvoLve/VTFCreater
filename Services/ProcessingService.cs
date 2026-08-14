@@ -68,6 +68,8 @@ public class ProcessingService
         {
             cancellationToken.ThrowIfCancellationRequested();
 
+            Console.WriteLine("漫反射贴图"+material.BaseColor);
+            Console.WriteLine("法线"+material.Normal);
             if (material.BaseColor is not null)
             {
                 logService.Info($"发现材质：{FormatMaterialLabel(material)}");
@@ -76,6 +78,7 @@ public class ProcessingService
             if (material.BaseColor is not null)
             {
                 var outputPath = BuildOutputPath(config.OutputDirectory, material.BaseColor);
+                Console.WriteLine("输出目录："+outputPath);
                 await _vtfGenerator.Generate(config.VTFCmdPath, material.BaseColor.FullPath, outputPath, config.Format,config.SizeClamp);
                 logService.Info($"生成：{Path.GetFileName(outputPath)}");
             }
@@ -90,7 +93,7 @@ public class ProcessingService
                 await _vmtGenerator.GenerateAsync(material, config.OutputDirectory);
                 logService.Info($"生成：{material.Name}.vmt");
             }
-
+            
             
         }
 

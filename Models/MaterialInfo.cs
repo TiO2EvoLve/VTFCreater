@@ -1,3 +1,4 @@
+using System;
 using VTFCreater.Enum;
 
 namespace VTFCreater.Models;
@@ -15,4 +16,5 @@ public class MaterialInfo
     
     public ShaderType ShaderType { get; set; } = ShaderType.texture;
     public bool ShouldGenerateVmt => BaseColor is not null;
+    
 }
