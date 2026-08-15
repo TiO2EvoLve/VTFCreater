@@ -21,8 +21,6 @@ public partial class MaterialEditorViewModel : ViewModelBase
     [
         new("BaseColor", "Base Color", true),
         new("Normal", "Normal"),
-        new("Alpha", "Alpha"),
-        new("Emissive", "Emissive")
     ];
 
     public Array Shaders { get; } = global::System.Enum.GetValues(typeof(MaterialShader));
