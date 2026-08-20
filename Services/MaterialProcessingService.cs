@@ -20,6 +20,7 @@ public sealed class MaterialProcessingService
         if (baseColor?.FilePath is null)
             throw new InvalidOperationException("Base Color 是必填插槽，请先添加图片。");
 
+        var materialRelativeDirectory = MaterialsPath.GetRelativeDirectory(outputDirectory);
         Directory.CreateDirectory(outputDirectory);
         var converted = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
         var temporaryDirectory = Path.Combine(Path.GetTempPath(), "VTFCreater", Guid.NewGuid().ToString("N"));
@@ -41,7 +42,10 @@ public sealed class MaterialProcessingService
                 var stagedVtf = Path.ChangeExtension(stagedImage, ".vtf");
                 var targetName = materialName + suffix + ".vtf";
                 File.Move(stagedVtf, Path.Combine(outputDirectory, targetName), true);
-                converted[slot.Key] = Path.ChangeExtension(targetName, null)!;
+                var textureName = Path.ChangeExtension(targetName, null)!;
+                converted[slot.Key] = string.IsNullOrEmpty(materialRelativeDirectory)
+                    ? textureName
+                    : $"{materialRelativeDirectory}/{textureName}";
                 log.Info($"已生成：{targetName}");
             }
             await _vmtGenerator.GenerateMaterialAsync(materialName, outputDirectory, shader, converted);

@@ -70,19 +70,21 @@ public partial class MaterialEditorViewModel : ViewModelBase
         }
         if (!Slots.First(slot => slot.Key == "BaseColor").HasFile)
         {
-            StatusMessage = "Base Color 是必填插槽。";
+            StatusMessage = "必须选择Base Color";
             return;
         }
 
         var directory = await FileDialogHelper.PickFolderAsync("选择 VTF 和 VMT 的保存位置");
         if (directory is null) return;
+        Console.WriteLine(directory);
+        
 
         IsGenerating = true;
         try
         {
             await _materialProcessingService.GenerateAsync(normalizedName, directory, SelectedShader, Slots,
                 SelectedFormat, SelectedSizeClamp, _configService.Config.VTFCmdPath, _logService);
-            StatusMessage = $"已生成 {normalizedName}.vtf、相关插槽 VTF 和 {normalizedName}.vmt。";
+            StatusMessage = $"已生成 {normalizedName}.vtf和 {normalizedName}.vmt。";
         }
         catch (Exception exception)
         {
