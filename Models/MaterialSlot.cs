@@ -17,7 +17,7 @@ public sealed partial class MaterialSlot : ObservableObject
     public string DisplayName { get; }
     public bool IsRequired { get; }
     [ObservableProperty] private string? _filePath;
-    public string FileName => FilePath is null ? "拖入图片或点击选择" : Path.GetFileName(FilePath);
+    public string FileName => FilePath is null ? "点击选择图片" : Path.GetFileName(FilePath);
     [ObservableProperty] private Bitmap? _preview;
     public bool HasFile => FilePath is not null;
 

@@ -24,7 +24,7 @@
             <ItemsControl ItemsSource="{Binding Slots}">
               <ItemsControl.ItemTemplate>
                 <DataTemplate x:DataType="models:MaterialSlot">
-                  <Border Classes="slot-card" DragDrop.AllowDrop="True" Tag="{Binding Key}" DragDrop.DragOver="Slot_DragOver" DragDrop.Drop="Slot_Drop">
+                  <Border Classes="slot-card" Tag="{Binding Key}">
                     <Grid ColumnDefinitions="82,*,Auto" ColumnSpacing="12">
                       <Border Classes="slot-preview" Width="82" Height="82">
                         <Image Source="{Binding Preview}" Stretch="Uniform" IsVisible="{Binding HasFile}" />
